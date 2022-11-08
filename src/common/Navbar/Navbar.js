@@ -51,13 +51,24 @@ const Navbar = () => {
                 </NavLink>
               ))}
             </div>
-            <NavLink
-              to="/login"
-              className="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
-              role="button"
-            >
-              LogIn
-            </NavLink>
+            <div className="flex items-center">
+              <NavLink
+                to="/register"
+                title=""
+                className=" ml-8 inline-flex justify-center text-base font-semibold text-white transition-all duration-200 border border-transparent hover:text-blue-700 focus:text-blue-700"
+                role="button"
+              >
+                {" "}
+                Register{" "}
+              </NavLink>
+              <NavLink
+                to="/login"
+                className="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
+                role="button"
+              >
+                LogIn
+              </NavLink>
+            </div>
           </nav>
 
           {/* mobile menu */}
