@@ -16,6 +16,7 @@ import About from "../About/About";
 import FAQ from "../FAQ/FAQ";
 import Help from "../Help/Help";
 import { Link } from "react-router-dom";
+import Services from "../../pages/Services/Services";
 const Home = () => {
   const sliderImg = [
     {
@@ -56,7 +57,7 @@ const Home = () => {
             type="button"
             className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
           >
-            <Link to="about"> Explore Services</Link>
+            <Link to="services"> Explore Services</Link>
           </button>
         </div>
 
@@ -85,6 +86,8 @@ const Home = () => {
         {/* <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" /> */}
         <div className="absolute z-[0] w-[50%] h-[50%] right-20 bottom-20 blue__gradient" />
       </div>
+
+      <Services />
       <About />
       <Help />
       <FAQ />

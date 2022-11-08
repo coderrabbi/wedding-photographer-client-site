@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   getAuth,
   GithubAuthProvider,
@@ -29,6 +30,7 @@ const Auth = () => {
         if (user.emailVerified) {
           navigate(from, { replace: true });
           loading = false;
+          toast.success("successfull");
         }
       })
       .catch((error) => {

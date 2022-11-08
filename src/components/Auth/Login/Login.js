@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdAlternateEmail, MdOutlineLock } from "react-icons/md";
 import Auth from "../Auth/Auth";
 import { AuthContext } from "../../../context/AuthProvider";
+import { toast } from "react-toastify";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ const Login = () => {
       if (user.uid) {
         navigate(from, { replace: true });
         loading = false;
+        toast.success("hello");
       }
     });
   };
@@ -43,10 +45,7 @@ const Login = () => {
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col mb-5"></div>
               <div className="flex flex-col mb-5">
-                <label
-                  for="email"
-                  className="mb-1 text-xs tracking-wide text-gray-600"
-                >
+                <label className="mb-1 text-xs tracking-wide text-gray-600">
                   E-Mail Address:
                 </label>
                 <div className="relative">
@@ -67,7 +66,6 @@ const Login = () => {
                   </div>
 
                   <input
-                    id="email"
                     type="email"
                     name="email"
                     className="
@@ -86,10 +84,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="flex flex-col mb-6">
-                <label
-                  for="password"
-                  className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-                >
+                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
                   Password:
                 </label>
                 <div className="relative">
@@ -112,7 +107,6 @@ const Login = () => {
                   </div>
 
                   <input
-                    id="password"
                     type="password"
                     name="password"
                     className="
@@ -156,9 +150,9 @@ const Login = () => {
                     <svg
                       className="h-6 w-6"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >

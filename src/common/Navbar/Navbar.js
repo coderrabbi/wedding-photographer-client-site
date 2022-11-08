@@ -37,14 +37,14 @@ const Navbar = () => {
             {!toggle ? (
               <VscMenu
                 onClick={toggleMenu}
-                className="inline-flex p-2 text-black transition-all duration-200
-            rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100 cursor-pointer text-[45px]"
+                className="inline-flex text-white p-2 transition-all duration-200
+            rounded-md lg:hidden   cursor-pointer text-[45px]"
               />
             ) : (
               <VscChromeClose
                 onClick={toggleMenu}
-                className="inline-flex p-2 text-black transition-all duration-200
-            rounded-md lg:hidden focus:bg-gray-100 hover:bg-gray-100 cursor-pointer text-[45px]"
+                className="inline-flex text-white p-2 transition-all duration-200
+                rounded-md lg:hidden   cursor-pointer text-[45px]"
               />
             )}
 
@@ -57,17 +57,24 @@ const Navbar = () => {
                 </NavLink>
               ))}
               {user ? (
-                <NavLink to={"/reviews"}>
-                  <li className="text-base list-none font-medium text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
-                    My Reviews
-                  </li>
-                </NavLink>
+                <>
+                  <NavLink to={"/reviews"}>
+                    <li className="text-base list-none font-medium text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                      My Reviews
+                    </li>
+                  </NavLink>
+                  <NavLink to={"/adddservices"}>
+                    <li className="text-base list-none font-medium text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                      Add Services
+                    </li>
+                  </NavLink>
+                </>
               ) : (
-                console.log("rabbi")
+                ""
               )}
             </div>
 
-            <div className="flex items-center">
+            <div className="hidden lg:flex lg:items-center">
               {user?.uid ? (
                 <>
                   <div className="flex items-center gap-2">
@@ -110,7 +117,7 @@ const Navbar = () => {
           {/* mobile menu */}
 
           {toggle && (
-            <nav className="pt-4 pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden absolute right-5 w-[200px]">
+            <nav className="pt-4 pb-6 bg-white border border-gray-200 rounded-md shadow-md lg:hidden absolute right-5 w-[200px] z-[5]">
               <div className="flow-root">
                 <div className="flex flex-col px-6 -my-2 space-y-1 text-center">
                   {navLinks.map((item, index) => (
@@ -127,24 +134,47 @@ const Navbar = () => {
               </div>
 
               <div className="px-6 mt-6 text-center flex flex-col gap-2">
-                <NavLink
-                  to="/register"
-                  title=""
-                  className="inline-flex justify-center text-base font-semibold text-black transition-all duration-200 border border-transparent hover:text-blue-700 focus:text-blue-700"
-                  role="button"
-                >
-                  {" "}
-                  Register{" "}
-                </NavLink>
-                <NavLink
-                  to="/login"
-                  title=""
-                  className="inline-flex justify-center px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md tems-center hover:bg-blue-700 focus:bg-blue-700"
-                  role="button"
-                >
-                  {" "}
-                  LogIn{" "}
-                </NavLink>
+                {user?.uid ? (
+                  <>
+                    <div className="flex flex-col  items-center ">
+                      <img
+                        className="rounded-full w-8"
+                        src={user.photoURL ? user.photoURL : avater}
+                        alt=""
+                      />
+                      <h4 className="text-black">{user.displayName}</h4>
+                    </div>
+                    <div className="flex justify-center">
+                      <button
+                        onClick={handleSignOut}
+                        className="items-center justify-center  px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md flex hover:bg-blue-700 focus:bg-blue-700 "
+                      >
+                        Log out
+                      </button>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <NavLink
+                      to="/register"
+                      title=""
+                      className="inline-flex justify-center text-base font-semibold text-black transition-all duration-200 border border-transparent hover:text-blue-700 focus:text-blue-700"
+                      role="button"
+                    >
+                      {" "}
+                      Register{" "}
+                    </NavLink>
+                    <NavLink
+                      to="/login"
+                      title=""
+                      className="inline-flex justify-center px-4 py-3 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md tems-center hover:bg-blue-700 focus:bg-blue-700"
+                      role="button"
+                    >
+                      {" "}
+                      LogIn{" "}
+                    </NavLink>
+                  </>
+                )}
               </div>
             </nav>
           )}

@@ -48,10 +48,7 @@ const Register = () => {
           <div className="mt-10">
             <form onSubmit={handleSubmit}>
               <div className="flex flex-col mb-5">
-                <label
-                  for="email"
-                  className="mb-1 text-xs tracking-wide text-gray-600"
-                >
+                <label className="mb-1 text-xs tracking-wide text-gray-600">
                   Name:
                 </label>
                 <div className="relative">
@@ -72,9 +69,8 @@ const Register = () => {
                   </div>
 
                   <input
-                    id="name"
                     type="text"
-                    name="text"
+                    name="name"
                     className="
             text-sm
             placeholder-gray-500
@@ -91,10 +87,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="flex flex-col mb-5">
-                <label
-                  for="email"
-                  className="mb-1 text-xs tracking-wide text-gray-600"
-                >
+                <label className="mb-1 text-xs tracking-wide text-gray-600">
                   E-Mail Address:
                 </label>
                 <div className="relative">
@@ -115,7 +108,6 @@ const Register = () => {
                   </div>
 
                   <input
-                    id="email"
                     type="email"
                     name="email"
                     className="
@@ -134,10 +126,7 @@ const Register = () => {
                 </div>
               </div>
               <div className="flex flex-col mb-6">
-                <label
-                  for="password"
-                  className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600"
-                >
+                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
                   Password:
                 </label>
                 <div className="relative">
@@ -160,7 +149,6 @@ const Register = () => {
                   </div>
 
                   <input
-                    id="password"
                     type="password"
                     name="password"
                     className="
@@ -204,9 +192,9 @@ const Register = () => {
                     <svg
                       className="h-6 w-6"
                       fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
