@@ -1,19 +1,36 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MdPersonPin, MdAlternateEmail, MdOutlineLock } from "react-icons/md";
+import Auth from "../Auth/Auth";
+import { AuthContext } from "../../../context/AuthProvider";
+
 const Register = () => {
+  const { createUser, loading } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    createUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        if (user) {
+          navigate("/");
+        }
+        form.reset();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       {" "}
       <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
         <div
-          className="
-  flex flex-col
-  bg-white
-  shadow-md
-  px-4
-  sm:px-6
-  md:px-8
+          className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8
   lg:px-10
   py-8
   rounded-3xl
@@ -29,7 +46,7 @@ const Register = () => {
           </div>
 
           <div className="mt-10">
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="flex flex-col mb-5">
                 <label
                   for="email"
@@ -55,9 +72,9 @@ const Register = () => {
                   </div>
 
                   <input
-                    id="email"
-                    type="email"
-                    name="email"
+                    id="name"
+                    type="text"
+                    name="text"
                     className="
             text-sm
             placeholder-gray-500
@@ -202,8 +219,7 @@ const Register = () => {
           </div>
         </div>
         <div className="flex justify-center items-center mt-6">
-          <Link
-            target="_blank"
+          <div
             className="
     inline-flex
     items-center
@@ -212,7 +228,7 @@ const Register = () => {
     text-xs text-center
   "
           >
-            <span className="ml-2">
+            <span className="ml-2 text-white">
               You have an account?
               <Link
                 to="/login"
@@ -221,8 +237,9 @@ const Register = () => {
                 Login here
               </Link>
             </span>
-          </Link>
+          </div>
         </div>
+        <Auth />
       </div>
     </div>
   );

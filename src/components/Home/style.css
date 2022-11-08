@@ -24,3 +24,6 @@
   height: 100%;
   object-fit: cover;
 }
+
+@media (mix-width: 1000px) {
+}

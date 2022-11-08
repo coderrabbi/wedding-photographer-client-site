@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/wedding-photographer.png";
 import { VscMenu, VscChromeClose } from "react-icons/vsc";
+import avater from "../../assets/avater.png";
+import { AuthContext } from "../../context/AuthProvider";
 const Navbar = () => {
   const navLinks = [
     { name: "Home", to: "/" },
@@ -9,6 +11,10 @@ const Navbar = () => {
     { name: "About Me", to: "/about" },
     { name: "Blog", to: "/blog" },
   ];
+  const { user, logOut } = useContext(AuthContext);
+  const handleSignOut = () => {
+    logOut();
+  };
   const [toggle, setToggle] = useState(false);
   const toggleMenu = () => {
     setToggle(!toggle);
@@ -50,24 +56,54 @@ const Navbar = () => {
                   </li>
                 </NavLink>
               ))}
+              {user ? (
+                <NavLink to={"/reviews"}>
+                  <li className="text-base list-none font-medium text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
+                    My Reviews
+                  </li>
+                </NavLink>
+              ) : (
+                console.log("rabbi")
+              )}
             </div>
+
             <div className="flex items-center">
-              <NavLink
-                to="/register"
-                title=""
-                className=" ml-8 inline-flex justify-center text-base font-semibold text-white transition-all duration-200 border border-transparent hover:text-blue-700 focus:text-blue-700"
-                role="button"
-              >
-                {" "}
-                Register{" "}
-              </NavLink>
-              <NavLink
-                to="/login"
-                className="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
-                role="button"
-              >
-                LogIn
-              </NavLink>
+              {user?.uid ? (
+                <>
+                  <div className="flex items-center gap-2">
+                    <img
+                      className="rounded-full w-10"
+                      src={user.photoURL ? user.photoURL : avater}
+                      alt=""
+                    />
+                    <h4 className="text-white">{user.displayName}</h4>
+                  </div>
+                  <button
+                    onClick={handleSignOut}
+                    className="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
+                  >
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <>
+                  <NavLink
+                    to="/register"
+                    title=""
+                    className=" ml-8 inline-flex justify-center text-base font-semibold text-white transition-all duration-200 border border-transparent hover:text-blue-700 focus:text-blue-700"
+                    role="button"
+                  >
+                    Register
+                  </NavLink>
+                  <NavLink
+                    to="/login"
+                    className="items-center justify-center hidden px-4 py-3 ml-10 text-base font-semibold text-white transition-all duration-200 bg-blue-600 border border-transparent rounded-md lg:inline-flex hover:bg-blue-700 focus:bg-blue-700"
+                    role="button"
+                  >
+                    LogIn
+                  </NavLink>
+                </>
+              )}
             </div>
           </nav>
 
