@@ -63,7 +63,7 @@ const Navbar = () => {
                       My Reviews
                     </li>
                   </NavLink>
-                  <NavLink to={"/adddservices"}>
+                  <NavLink to={"/addservices"}>
                     <li className="text-base list-none font-medium text-white transition-all duration-200 hover:text-blue-600 focus:text-blue-600">
                       Add Services
                     </li>

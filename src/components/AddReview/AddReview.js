@@ -8,7 +8,7 @@ const AddReview = ({ item }) => {
     const form = e.target;
     const review = form.text.value;
     setReview(review);
-    console.log(e.target.value);
+    console.log(review);
     const field = e.target.name;
     const value = e.target.value;
     console.log(field, value);

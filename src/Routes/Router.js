@@ -7,6 +7,7 @@ import Register from "../components/Auth/Register/Register";
 import Home from "../components/Home/Home";
 import Main from "../Layout/Main";
 import MyReviews from "../pages/MyReviews/MyReviews";
+import AddServices from "../pages/Services/AddServices";
 import ServiceItems from "../pages/Services/ServiceItems";
 import Services from "../pages/Services/Services";
 import PrivetRouter from "./privetRouter/PrivetRouter";
@@ -40,6 +41,7 @@ export const routes = createBrowserRouter([
         element: <ServiceItems />,
       },
       { path: "/blog", element: <Blog /> },
+      { path: "/addservices", element: <AddServices /> },
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       {
