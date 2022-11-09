@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
+import AddReview from "../../components/AddReview/AddReview";
+import { AuthContext } from "../../context/AuthProvider";
 import styles from "../../styles";
 import ServiceReview from "./ServiceReview";
 
 const ServiceItems = () => {
+  const { user } = useContext(AuthContext);
+
   const db = useLoaderData();
   return (
     <div
@@ -23,6 +27,7 @@ const ServiceItems = () => {
         </div>
       </div>
       <ServiceReview item={db} />
+      {user ? <AddReview item={db} /> : ""}
     </div>
   );
 };
