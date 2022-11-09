@@ -11,7 +11,10 @@ const Services = () => {
         className={`flex md:flex-row flex-col items-center justify-center gap-5 ${styles.paddingY}`}
       >
         {db?.map((item) => (
-          <div className="rounded-lg shadow-lg bg-white max-w-sm" key={item.id}>
+          <div
+            className="rounded-lg shadow-lg bg-white max-w-sm"
+            key={item._id}
+          >
             <Link>
               <img className="rounded-t-lg" src={item.imgUrl} alt="" />
             </Link>
@@ -26,7 +29,7 @@ const Services = () => {
                   <p>{item.rating}</p>
                 </div>
                 <Link
-                  to={`/services/${item.id}`}
+                  to={`/services/${item._id}`}
                   className=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
                 >
                   See more details

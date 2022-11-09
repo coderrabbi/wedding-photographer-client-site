@@ -1,12 +1,10 @@
 import React from "react";
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import styles from "../../styles";
 import ServiceReview from "./ServiceReview";
 
 const ServiceItems = () => {
   const db = useLoaderData();
-  const params = useParams();
-  console.log(params.id);
   return (
     <div
       className={`${styles.paddingX}${styles.paddingY} flex flex-col  gap-4`}
