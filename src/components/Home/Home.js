@@ -2,14 +2,11 @@ import React from "react";
 // import { AuthContext } from "../../context/AuthProvider";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
 import "./style.css";
-
 import { Autoplay, Pagination, Navigation } from "swiper";
 import styles from "../../styles";
 import About from "../About/About";
@@ -17,9 +14,8 @@ import FAQ from "../FAQ/FAQ";
 import Help from "../Help/Help";
 import { Link } from "react-router-dom";
 import Services from "../../pages/Services/Services";
-import useTitle from "../../hooks/useTitle";
+import { Helmet } from "react-helmet";
 const Home = () => {
-  useTitle("Home");
   const sliderImg = [
     {
       imgLink:
@@ -40,6 +36,9 @@ const Home = () => {
   // const authInfo = useContext(AuthContext);
   return (
     <div className={`${styles.paddingY} ${styles.paddingX}`}>
+      <Helmet>
+        <title>Home-wedding photographer</title>
+      </Helmet>
       <div className={`flex md:flex-row flex-col-reverse `}>
         <div
           className={`flex-1 ${styles.flexStart} flex-col xl:px-0 sm:px-16 px-6  `}

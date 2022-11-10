@@ -2,11 +2,15 @@ import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import styles from "../../styles";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import { Helmet } from "react-helmet";
 const Services = () => {
   const db = useLoaderData();
-  console.log(db);
+  console.log(db.length);
   return (
     <div>
+      <Helmet>
+        <title>Service-wedding photographer</title>
+      </Helmet>
       <div
         className={`flex-1 ${styles.flexCenter} mt-8 flex-col xl:px-0 sm:px-16 px-6  `}
       >
@@ -16,7 +20,7 @@ const Services = () => {
         </h1>
       </div>
       <div
-        className={`flex md:flex-row flex-col items-center justify-center gap-5 py-5npm install react-photo-view`}
+        className={`grid md:grid-cols-3 grid-cols-1  items-center justify-center gap-5 py-5 `}
       >
         <PhotoProvider>
           {db?.map((item) => (
@@ -96,6 +100,18 @@ const Services = () => {
             </div>
           ))}
         </PhotoProvider>
+      </div>
+      <div className="text-center mb-5 ">
+        {db.length > 3 ? (
+          <button
+            type="button"
+            className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
+          >
+            <Link to="services"> See Services</Link>
+          </button>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

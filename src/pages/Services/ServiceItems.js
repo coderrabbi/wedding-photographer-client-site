@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import AddReview from "../../components/AddReview/AddReview";
 import { AuthContext } from "../../context/AuthProvider";
-import useTitle from "../../hooks/useTitle";
+import { Helmet } from "react-helmet";
 import styles from "../../styles";
 import ServiceReview from "./ServiceReview";
 
@@ -10,11 +10,14 @@ const ServiceItems = () => {
   const { user } = useContext(AuthContext);
 
   const db = useLoaderData();
-  useTitle("serviceitems");
+
   return (
     <div
       className={`${styles.paddingX}${styles.paddingY} flex flex-col  gap-4`}
     >
+      <Helmet>
+        <title>Service items-wedding-photographer</title>
+      </Helmet>
       <div className="w-full mx-auto  overflow-hidden shadow-lg">
         <img className="w-full rounded" src={db.imgUrl} alt={db.title} />
         <div className="px-6 py-4">

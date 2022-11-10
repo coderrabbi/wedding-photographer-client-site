@@ -4,6 +4,7 @@ import { MdAlternateEmail, MdOutlineLock } from "react-icons/md";
 import Auth from "../Auth/Auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { toast } from "react-toastify";
+import { Helmet } from "react-helmet";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -28,6 +29,9 @@ const Login = () => {
   return (
     <div>
       {" "}
+      <Helmet>
+        <title>Login-wedding-photographer</title>
+      </Helmet>
       <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
         <div
           className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8lg:px-10

@@ -1,7 +1,7 @@
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
-const useTitle = (title) => {
-  useEffect(() => (document.title = `${title}-wedding-photograper`), [title]);
-};
+// const useTitle = (title) => {
+//   useEffect(() => (document.title = `${title}-wedding-photograper`), [title]);
+// };
 
-export default useTitle;
+// export default useTitle;

@@ -1,48 +1,43 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 import styles from "../../styles";
 
 const AddReview = ({ item }) => {
-  const [reviews, setReview] = useState({});
-  const submitData = (e) => {
+  const [reviews, setReview] = useState([]);
+  const { user } = useContext(AuthContext);
+  const handleReview = (e) => {
     e.preventDefault();
-    const form = e.target;
-    const review = form.text.value;
-    setReview(review);
-    console.log(review);
-    const field = e.target.name;
-    const value = e.target.value;
-    console.log(field, value);
-    let newReview = { ...reviews };
-    newReview[field] = value;
-    setReview(newReview);
+    console.log(typeof reviews);
 
-    fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services/${item._id}`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
+    fetch(`http://localhost:5000/services/${item._id}`, {
+      method: "PUT",
+      headers: { "content-type": "application/json" },
       body: JSON.stringify(reviews),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.acknowledged) {
-          alert("successfully user created");
-          setReview(data);
-          e.target.reset();
+        if (data.acknowledged > 0) {
+          alert("review added");
         }
       });
+
+    e.target.reset();
+  };
+  const handleInputRev = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    setReview([{ ...item, review: { reviewer: user.email, [name]: value } }]);
   };
 
   return (
     <div>
       <h1>add review</h1>
       <div className="flex">
-        <form onSubmit={submitData}>
-          <textarea
-            name="text"
+        <form onSubmit={handleReview}>
+          <input
+            onChange={handleInputRev}
+            name="title"
             type="text"
-            rows="4"
-            cols="50"
             className="
         text-sm
         pl-10
@@ -54,6 +49,7 @@ const AddReview = ({ item }) => {
         focus:outline-none focus:border-blue-400
       "
           />
+
           <button
             type="submit"
             className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}

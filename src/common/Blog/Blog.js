@@ -1,9 +1,8 @@
 import React from "react";
 import styles from "../../styles";
 import { BsFillQuestionCircleFill } from "react-icons/bs";
-import useTitle from "../../hooks/useTitle";
+import { Helmet } from "react-helmet";
 const Blog = () => {
-  useTitle("Blog");
   const faq = [
     {
       questions: "Difference between SQL and NoSQL?",
@@ -25,6 +24,9 @@ const Blog = () => {
 
   return (
     <div className={`${styles.paddingY} ${styles.paddingX}`}>
+      <Helmet>
+        <title>Blog-Weeding-photographer</title>
+      </Helmet>
       <div className="my-8">
         <h1 className="font-poppins font-semibold ss:text-[72px] text-[52px] text-white ss:leading-[100px] leading-[75px] text-center">
           Questions & Answers

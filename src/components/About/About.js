@@ -1,10 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles, { layout } from "../../styles";
-
+import { Helmet } from "react-helmet";
 const About = () => {
   return (
     <div>
+      <Helmet>
+        <title>About me-Wedding-photographer</title>
+      </Helmet>
       <section className={`${layout.section} gap-12`}>
         <div className=" ">
           <img

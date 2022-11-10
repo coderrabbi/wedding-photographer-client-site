@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { MdPersonPin, MdAlternateEmail, MdOutlineLock } from "react-icons/md";
 import Auth from "../Auth/Auth";
 import { AuthContext } from "../../../context/AuthProvider";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
   const { createUser, loading } = useContext(AuthContext);
@@ -28,6 +29,9 @@ const Register = () => {
   return (
     <div>
       {" "}
+      <Helmet>
+        <title>register-weeding-phtotgrapher</title>
+      </Helmet>
       <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
         <div
           className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8

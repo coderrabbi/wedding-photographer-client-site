@@ -1,125 +1,133 @@
 import React, { useState } from "react";
-import useTitle from "../../hooks/useTitle";
-
+// import useTitle from "../../hooks/useTitle";
+import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import styles from "../../styles";
 const AddServices = () => {
-  useTitle("add-services");
-  const [service, setService] = useState([]);
-  const submitData = (e) => {
+  const [service, setService] = useState({});
+  const [review, setReview] = useState([]);
+  const addUser = (e) => {
     e.preventDefault();
     fetch("http://localhost:5000/services", {
       method: "POST",
-      header: { "content-type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(service),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (service.acknowledged) {
-          setService(data);
+        if (data.acknowledged) {
+          alert("successfully service created");
           e.target.reset();
         }
       });
-    alert("Service");
+    console.log(review);
   };
-  console.log(service);
-  const onBlurSubmit = (event) => {
-    console.log(event.target.value);
-    const field = event.target.name;
-    const value = event.target.value;
-    let newService = [...service];
-    newService[field] = value;
-    setService(newService);
+
+  const handleInput = (e) => {
+    const value = e.target.value;
+    const name = e.target.name;
+    setService({ ...service, [name]: value });
   };
+
   return (
-    <div>
-      <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
-        <div
-          className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-5 rounded-xl w-50 max-w-md
-"
-        >
-          <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
-            Add a Services
-          </div>
-          <div className="mt-4 self-center text-xl sm:text-sm text-gray-800">
-            Enter All Requirement Information To Add a Service
-          </div>
-
-          <div className="mt-10">
-            <form onSubmit={submitData}>
-              <div className="flex flex-col mb-5">
-                <label className="mb-1 text-xs tracking-wide text-gray-600">
-                  Service Image
-                </label>
-                <div className="relative">
-                  <input
-                    onBlur={onBlurSubmit}
-                    required
-                    type="text"
-                    name="link"
-                    className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400  w-full  py-2 focus:outline-none focus:border-blue-400 "
-                    placeholder="Enter your service image link"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col mb-5">
-                <label className="mb-1 text-xs tracking-wide text-gray-600">
-                  Service Name:
-                </label>
-                <div className="relative">
-                  <input
-                    onBlur={onBlurSubmit}
-                    required
-                    type="text"
-                    name="text"
-                    className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl  border border-gray-400  w-full  py-2 focus:outline-none focus:border-blue-400"
-                    placeholder="Enter your service name"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col mb-5">
-                <label className="mb-1 text-xs tracking-wide text-gray-600">
-                  Description of service
-                </label>
-                <div className="relative">
-                  <textarea
-                    onBlur={onBlurSubmit}
-                    required
-                    type="text"
-                    name="description"
-                    rows="5"
-                    className=" text-sm  placeholder-gray-500  pl-10  pr-4  rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400 "
-                    placeholder="Enter your service description"
-                  />
-                </div>
-              </div>
-              <div className="flex flex-col mb-6">
-                <label className="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
-                  Price of service
-                </label>
-                <div className="relative">
-                  <input
-                    onBlur={onBlurSubmit}
-                    required
-                    type="number"
-                    name="price"
-                    className=" text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400
+    <div className="w-full mx-auto my-8">
+      <Helmet>
+        <title>Add Service-Wedding-Photographer</title>
+      </Helmet>
+      <div
+        className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8lg:px-10
+          py-8
+          rounded-3xl
+          w-50
+          mx-auto
+          max-w-md
           "
-                    placeholder="Enter your service price"
-                  />
-                </div>
-              </div>
+      >
+        <form onSubmit={addUser} className=" flex flex-col gap-3">
+          <input
+            onChange={handleInput}
+            required
+            type="text"
+            name="imgUrl"
+            placeholder="imgUrl"
+            className="
+            text-sm
+            placeholder-gray-500
+            pl-10
+            pr-4
+            rounded-2xl
+            border border-gray-400
+            w-full
+            py-2
+        "
+          />
 
-              <div className="flex w-full">
-                <button
-                  type="submit"
-                  className="flex mt-2 items-center  justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-500  py-2  w-1/2 mx-auto transition duration-150 rounded-xl ease-in "
-                >
-                  <span className="mr-2 uppercase">Add service</span>
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+          <input
+            onChange={handleInput}
+            required
+            type="text"
+            name="title"
+            placeholder="Title"
+            className="
+            text-sm
+            placeholder-gray-500
+            pl-10
+            pr-4
+            rounded-2xl
+            border border-gray-400
+            w-full
+            py-2
+         "
+          />
+          <textarea
+            onChange={handleInput}
+            required
+            rows="5"
+            type="text"
+            name="desciption"
+            placeholder="desciption"
+            className="
+            text-sm
+            placeholder-gray-500
+            pl-10
+            pr-4
+            rounded-2xl
+            border border-gray-400
+            w-full
+            py-2
+         "
+          />
+
+          <input
+            onChange={handleInput}
+            required
+            type="number"
+            name="price"
+            placeholder="price"
+            className="
+            text-sm
+            placeholder-gray-500
+            pl-10
+            pr-4
+            rounded-2xl
+            border border-gray-400
+            w-full
+            py-2
+         "
+          />
+
+          <button
+            className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
+            type="submit"
+          >
+            Add service
+          </button>
+        </form>
       </div>
+
+      <Link to="/">home</Link>
     </div>
   );
 };

@@ -1,8 +1,8 @@
 import React from "react";
-import useTitle from "../../hooks/useTitle";
+// import useTitle from "../../hooks/useTitle";
 
 const ServiceReview = ({ item }) => {
-  useTitle("servie-review");
+  // useTitle("servie-review");
   const { review } = item;
   return (
     <div className=" border-t-2 border-gray-200 ">
