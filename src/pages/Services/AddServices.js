@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-// import useTitle from "../../hooks/useTitle";
+
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 import styles from "../../styles";
 const AddServices = () => {
   const [service, setService] = useState({});
@@ -18,7 +19,7 @@ const AddServices = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.acknowledged) {
-          alert("successfully service created");
+          Swal.fire("Good job!", "You added a service", "success");
           e.target.reset();
         }
       });
@@ -86,8 +87,8 @@ const AddServices = () => {
             required
             rows="5"
             type="text"
-            name="desciption"
-            placeholder="desciption"
+            name="description"
+            placeholder="description"
             className="
             text-sm
             placeholder-gray-500

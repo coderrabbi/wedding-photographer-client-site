@@ -21,7 +21,7 @@ const Login = () => {
       if (user.uid) {
         navigate(from, { replace: true });
         loading = false;
-        toast.success("hello");
+        toast.success("login successful");
       }
     });
   };
@@ -133,6 +133,7 @@ const Login = () => {
                 <button
                   type="submit"
                   className="flex
+                  
       mt-2
       items-center
       justify-center

@@ -68,3 +68,16 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+### site live link
+
+https://wedding-photographer07.web.app
+
+### feature this site
+
+-this is weeding photographer website, you can login this site.
+-after login you get some extra feature
+-you can choose a service and know about my service
+-you can explore the service and review the service
+-after reviewing the service you can edit this review
+-you can delete your review

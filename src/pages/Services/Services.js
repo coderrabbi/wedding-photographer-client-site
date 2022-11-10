@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import styles from "../../styles";
-import ImageViewer from "react-simple-image-viewer";
 import { Helmet } from "react-helmet";
 import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
@@ -47,7 +46,7 @@ const Services = () => {
                         Highlight
                       </span>
                       <h2 className="mt-2 mb-2  font-bold">{item.title}</h2>
-                      <p className="text-sm">{item.description}</p>
+                      <p className="text-sm">{item.description}...</p>
                       <div className="mt-3 flex items-center">
                         <span className="text-sm font-semibold">$ </span>
                         <span className="font-bold text-xl">{item.price}</span>
