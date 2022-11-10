@@ -17,7 +17,9 @@ import FAQ from "../FAQ/FAQ";
 import Help from "../Help/Help";
 import { Link } from "react-router-dom";
 import Services from "../../pages/Services/Services";
+import useTitle from "../../hooks/useTitle";
 const Home = () => {
+  useTitle("Home");
   const sliderImg = [
     {
       imgLink:

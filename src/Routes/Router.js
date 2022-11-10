@@ -23,6 +23,8 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
+        // loader: () =>
+        //   fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services`),
         element: <Home />,
       },
       {

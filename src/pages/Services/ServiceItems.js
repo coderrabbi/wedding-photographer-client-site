@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
 import AddReview from "../../components/AddReview/AddReview";
 import { AuthContext } from "../../context/AuthProvider";
+import useTitle from "../../hooks/useTitle";
 import styles from "../../styles";
 import ServiceReview from "./ServiceReview";
 
@@ -9,6 +10,7 @@ const ServiceItems = () => {
   const { user } = useContext(AuthContext);
 
   const db = useLoaderData();
+  useTitle("serviceitems");
   return (
     <div
       className={`${styles.paddingX}${styles.paddingY} flex flex-col  gap-4`}

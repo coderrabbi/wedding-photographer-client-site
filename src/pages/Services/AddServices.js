@@ -1,17 +1,39 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import useTitle from "../../hooks/useTitle";
 
 const AddServices = () => {
+  useTitle("add-services");
+  const [service, setService] = useState([]);
+  const submitData = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:5000/services", {
+      method: "POST",
+      header: { "content-type": "application/json" },
+      body: JSON.stringify(service),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (service.acknowledged) {
+          setService(data);
+          e.target.reset();
+        }
+      });
+    alert("Service");
+  };
+  console.log(service);
+  const onBlurSubmit = (event) => {
+    console.log(event.target.value);
+    const field = event.target.name;
+    const value = event.target.value;
+    let newService = [...service];
+    newService[field] = value;
+    setService(newService);
+  };
   return (
     <div>
       <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
         <div
-          className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8
-  lg:px-10
-  py-5
-  rounded-xl
-  w-50
-  max-w-md
+          className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8 lg:px-10 py-5 rounded-xl w-50 max-w-md
 "
         >
           <div className="font-medium self-center text-xl sm:text-3xl text-gray-800">
@@ -22,18 +44,19 @@ const AddServices = () => {
           </div>
 
           <div className="mt-10">
-            <form>
+            <form onSubmit={submitData}>
               <div className="flex flex-col mb-5">
                 <label className="mb-1 text-xs tracking-wide text-gray-600">
                   Service Image
                 </label>
                 <div className="relative">
                   <input
+                    onBlur={onBlurSubmit}
                     required
-                    type="file"
-                    name="file"
+                    type="text"
+                    name="link"
                     className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400  w-full  py-2 focus:outline-none focus:border-blue-400 "
-                    placeholder="Enter your service name"
+                    placeholder="Enter your service image link"
                   />
                 </div>
               </div>
@@ -43,9 +66,10 @@ const AddServices = () => {
                 </label>
                 <div className="relative">
                   <input
+                    onBlur={onBlurSubmit}
                     required
                     type="text"
-                    name="name"
+                    name="text"
                     className="text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl  border border-gray-400  w-full  py-2 focus:outline-none focus:border-blue-400"
                     placeholder="Enter your service name"
                   />
@@ -57,21 +81,12 @@ const AddServices = () => {
                 </label>
                 <div className="relative">
                   <textarea
+                    onBlur={onBlurSubmit}
                     required
                     type="text"
                     name="description"
                     rows="5"
-                    className="
-            text-sm
-            placeholder-gray-500
-            pl-10
-            pr-4
-            rounded-2xl
-            border border-gray-400
-            w-full
-            py-2
-            focus:outline-none focus:border-blue-400
-          "
+                    className=" text-sm  placeholder-gray-500  pl-10  pr-4  rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400 "
                     placeholder="Enter your service description"
                   />
                 </div>
@@ -82,19 +97,11 @@ const AddServices = () => {
                 </label>
                 <div className="relative">
                   <input
+                    onBlur={onBlurSubmit}
                     required
                     type="number"
                     name="price"
-                    className="
-            text-sm
-            placeholder-gray-500
-            pl-10
-            pr-4
-            rounded-2xl
-            border border-gray-400
-            w-full
-            py-2
-            focus:outline-none focus:border-blue-400
+                    className=" text-sm placeholder-gray-500 pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400
           "
                     placeholder="Enter your service price"
                   />
@@ -104,39 +111,13 @@ const AddServices = () => {
               <div className="flex w-full">
                 <button
                   type="submit"
-                  className="flex
-          mt-2
-          items-center
-          justify-center
-          focus:outline-none
-          text-white text-sm
-          sm:text-base
-          bg-blue-500
-          hover:bg-blue-600
-          rounded-2xl
-          py-2
-          w-full
-          transition
-          duration-150
-          ease-in
-        "
+                  className="flex mt-2 items-center  justify-center focus:outline-none text-white text-sm sm:text-base bg-blue-500  py-2  w-1/2 mx-auto transition duration-150 rounded-xl ease-in "
                 >
                   <span className="mr-2 uppercase">Add service</span>
                 </button>
               </div>
             </form>
           </div>
-        </div>
-        <div className="flex justify-center items-center mt-6">
-          <div
-            className="
-    inline-flex
-    items-center
-    text-gray-700
-    font-medium
-    text-xs text-center
-  "
-          ></div>
         </div>
       </div>
     </div>
