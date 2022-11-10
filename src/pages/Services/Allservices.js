@@ -1,20 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import styles from "../../styles";
 import { Helmet } from "react-helmet";
 import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 const Services = () => {
-  const [db, setDb] = useState([]);
-  const [page, setPage] = useState(0);
-  const [size, setSize] = useState(3);
-  useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/services?page=${page}&size=${size}`
-    )
-      .then((res) => res.json())
-      .then((data) => setDb(data));
-  }, [page, size]);
+  const db = useLoaderData();
+
   console.log(db);
   return (
     <div>
@@ -118,15 +110,6 @@ const Services = () => {
           </div>
         </div>
       </PhotoProvider>
-
-      <div className="text-center mb-5 ">
-        <button
-          type="button"
-          className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
-        >
-          <Link to="services"> See Services</Link>
-        </button>
-      </div>
     </div>
   );
 };

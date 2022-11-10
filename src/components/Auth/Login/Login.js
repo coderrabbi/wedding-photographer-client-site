@@ -5,25 +5,35 @@ import Auth from "../Auth/Auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { toast } from "react-toastify";
 import { Helmet } from "react-helmet";
+import Loader from "../../Loader/Loader";
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
-  const { signIn, loading } = useContext(AuthContext);
+  const { signIn, loading, setLoading } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
-    signIn(email, password).then((result) => {
-      const user = result.user;
-      if (user.uid) {
-        navigate(from, { replace: true });
-        loading = false;
-        toast.success("login successful");
-      }
-    });
+    signIn(email, password)
+      .then((result) => {
+        const user = result.user;
+        if (user.uid) {
+          navigate(from, { replace: true });
+          setLoading(false);
+          toast.success("login successful");
+        }
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   return (
@@ -32,6 +42,7 @@ const Login = () => {
       <Helmet>
         <title>Login-wedding-photographer</title>
       </Helmet>
+      {loading && <Loader />}
       <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
         <div
           className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8lg:px-10

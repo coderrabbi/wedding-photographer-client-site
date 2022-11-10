@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 
 import { Helmet } from "react-helmet";
-import { Link } from "react-router-dom";
+
 import Swal from "sweetalert2";
 import styles from "../../styles";
 const AddServices = () => {
   const [service, setService] = useState({});
   const [review, setReview] = useState([]);
   const addUser = (e) => {
+    // post data
+
     e.preventDefault();
-    fetch("http://localhost:5000/services", {
+    fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,6 +36,7 @@ const AddServices = () => {
 
   return (
     <div className="w-full mx-auto my-8">
+      {/* page title change */}
       <Helmet>
         <title>Add Service-Wedding-Photographer</title>
       </Helmet>
@@ -119,6 +122,7 @@ const AddServices = () => {
          "
           />
 
+          {/* submit button */}
           <button
             className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
             type="submit"
@@ -127,8 +131,6 @@ const AddServices = () => {
           </button>
         </form>
       </div>
-
-      <Link to="/">home</Link>
     </div>
   );
 };

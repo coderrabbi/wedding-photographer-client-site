@@ -1,6 +1,4 @@
-import React from "react";
-// import { AuthContext } from "../../context/AuthProvider";
-// Import Swiper React components
+import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
@@ -63,7 +61,7 @@ const Home = () => {
         </div>
 
         <Swiper
-          className={`flex-1 flex ${styles.flexCenter} md:my-0 my-10 relative mySwiper rounded-xl`}
+          className={`flex-1 hidden md:flex  ${styles.flexCenter} md:my-0 my-10 relative mySwiper rounded-xl`}
           spaceBetween={30}
           centeredSlides={true}
           autoplay={{

@@ -17,12 +17,15 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         if (user) {
+          alert("successfully account created");
           navigate("/");
         }
         form.reset();
       })
       .catch((error) => {
         console.log(error);
+        alert("email already in use");
+        form.reset();
       });
   };
 

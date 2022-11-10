@@ -9,7 +9,8 @@ import Main from "../Layout/Main";
 import MyReviews from "../pages/MyReviews/MyReviews";
 import AddServices from "../pages/Services/AddServices";
 import ServiceItems from "../pages/Services/ServiceItems";
-import Services from "../pages/Services/Services";
+import Allservices from "../pages/Services/Allservices";
+
 import PrivetRouter from "./privetRouter/PrivetRouter";
 
 export const routes = createBrowserRouter([
@@ -23,15 +24,15 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        loader: () =>
-          fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services`),
+        // loader: () =>
+        //   fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services`),
         element: <Home />,
       },
       {
         path: "/services",
         loader: () =>
-          fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services`),
-        element: <Services />,
+          fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/allservices`),
+        element: <Allservices />,
       },
       {
         path: "/services/:id",
