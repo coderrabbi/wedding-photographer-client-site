@@ -1,24 +1,25 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthProvider";
 import styles from "../../styles";
-
+import Swal from "sweetalert2";
+import moment from "moment";
 const AddReview = ({ item }) => {
-  const [reviews, setReview] = useState([]);
   const { user } = useContext(AuthContext);
+  const { email, photoURL, displayName } = user;
+  const [reviews, setReviews] = useState({});
   const handleReview = (e) => {
     e.preventDefault();
-    console.log(typeof reviews);
 
     fetch(`http://localhost:5000/services/${item._id}`, {
-      method: "PUT",
+      method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(reviews),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.acknowledged > 0) {
-          alert("review added");
-        }
+        // if (data.acknowledged > 0) {
+        Swal.fire("Good job!", "You added a review", "success");
+        // }
       });
 
     e.target.reset();
@@ -26,7 +27,16 @@ const AddReview = ({ item }) => {
   const handleInputRev = (e) => {
     const value = e.target.value;
     const name = e.target.name;
-    setReview([{ ...item, review: { reviewer: user.email, [name]: value } }]);
+    setReviews({
+      ...reviews,
+      email,
+      photoURL,
+      serviceTitle: item.title,
+      displayName,
+      timeStamp: moment().format("LL"),
+      [name]: value,
+      serviceId: item._id,
+    });
   };
 
   return (
@@ -34,27 +44,22 @@ const AddReview = ({ item }) => {
       <h1>add review</h1>
       <div className="flex">
         <form onSubmit={handleReview}>
-          <input
+          <textarea
             onChange={handleInputRev}
-            name="title"
+            rows="10"
+            cols="50"
+            required
+            name="describe"
             type="text"
-            className="
-        text-sm
-        pl-10
-        pr-4
-        rounded-2xl
-        border border-gray-400
-        w-full
-        py-2
-        focus:outline-none focus:border-blue-400
-      "
+            className=" text-sm pl-10 pr-4 rounded-2xl border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
           />
 
           <button
             type="submit"
-            className={`py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
+            className={`
+            py-4 px-6 outline-none font-poppins bg-blue-gradient ${styles} text-primary rounded-[10px] mt-6`}
           >
-            Add review
+            Add Review
           </button>
         </form>
       </div>

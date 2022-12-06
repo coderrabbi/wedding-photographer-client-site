@@ -20,7 +20,19 @@ const Login = () => {
     signIn(email, password)
       .then((result) => {
         const user = result.user;
+        const currentUser = { email: user.email };
         if (user.uid) {
+          fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(currentUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              localStorage.setItem("service_toke", data.token);
+            });
           navigate(from, { replace: true });
           setLoading(false);
           toast.success("login successful");
@@ -38,7 +50,6 @@ const Login = () => {
 
   return (
     <div>
-      {" "}
       <Helmet>
         <title>Login-wedding-photographer</title>
       </Helmet>
@@ -65,14 +76,8 @@ const Login = () => {
                 </label>
                 <div className="relative">
                   <div
-                    className="
-        inline-flex
-        items-center
-        justify-center
-        absolute
-        left-0
-        top-0
-        h-full
+                    className="inline-flex items-center justify-center absolute left-0 top-0
+ h-full
         w-10
         text-gray-400
       "

@@ -1,30 +1,41 @@
-import React from "react";
-// import useTitle from "../../hooks/useTitle";
+import React, { useEffect, useState } from "react";
 
 const ServiceReview = ({ item }) => {
-  // useTitle("servie-review");
-  const { review } = item;
+  const [review, setReview] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/review`)
+      .then((res) => res.json())
+      .then((data) => {
+        setReview(data);
+      });
+  }, [review]);
+  const filterReview = review?.filter((i) => i.serviceId === item._id);
+
   return (
     <div className=" border-t-2 border-gray-200 ">
-      {review?.map((rev) => (
-        <div key={rev.reviewerEmail} className="mt-5">
-          <div className="flex gap-4 items-center">
+      {filterReview?.map((rev) => (
+        <div key={rev._id} className="mt-5">
+          <div className="  items-center">
             <div className="flex  items-center gap-2">
               <img
-                className="w-[50px]"
-                src={rev.reviewerImg}
-                alt={rev.reviewer}
+                className="w-[80px] rounded-full"
+                src={rev.photoURL ? rev.photoURL : ""}
+                alt={rev.displayName}
               />
-            </div>
-            <div className="flex flex-col gap-2">
-              <span className="text-gray-200 text-[16px]">{rev.reviewer}</span>
-              <div className="flex gap-3">
+              <div className="flex flex-col">
+                <span className="text-gray-200 text-[16px]">
+                  {rev.displayName}
+                </span>
                 <span className="text-gray-200">***</span>
                 <span className="text-gray-200">{rev.timeStamp}</span>
               </div>
             </div>
+            <div>
+              <div className="flex flex-col ">
+                <p className="text-gray-200">{rev.describe}</p>
+              </div>
+            </div>
           </div>
-          <p className="text-gray-200 my-3">{rev.title}</p>
         </div>
       ))}
     </div>

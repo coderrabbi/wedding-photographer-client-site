@@ -17,7 +17,7 @@ const Auth = () => {
   const navigate = useNavigate();
   const from = location.state?.from?.pathname || "/";
   const [user, setUser] = useState({});
-  const { loading } = useContext(AuthContext);
+  const { loading, setLoading } = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const githubProvider = new GithubAuthProvider();
 
@@ -27,11 +27,31 @@ const Auth = () => {
         const user = result.user;
         console.log(user);
         setUser(user);
-        if (user.emailVerified) {
+
+        const currentUser = { email: user.email };
+        if (user.uid) {
+          fetch("http://localhost:5000/jwt", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(currentUser),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+              localStorage.setItem("service-token", data.token);
+            });
           navigate(from, { replace: true });
-          loading = false;
-          toast.success("successfull");
+          setLoading(false);
+          toast.success("login successful");
         }
+
+        // if (user.emailVerified) {
+        //   navigate(from, { replace: true });
+        //   loading = false;
+        //   toast.success("successfull");
+        // }
       })
       .catch((error) => {
         console.log(error);

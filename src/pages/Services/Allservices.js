@@ -6,8 +6,6 @@ import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
 const Services = () => {
   const db = useLoaderData();
-
-  console.log(db);
   return (
     <div>
       <Helmet>

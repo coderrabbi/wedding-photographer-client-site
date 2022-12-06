@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styles from "../../styles";
 import { Helmet } from "react-helmet";
 import "react-photo-view/dist/react-photo-view.css";
@@ -9,13 +9,10 @@ const Services = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
   useEffect(() => {
-    fetch(
-      `${process.env.REACT_APP_SERVER_BASE_URL}/services?page=${page}&size=${size}`
-    )
+    fetch(`http://localhost:5000/services?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => setDb(data));
   }, [page, size]);
-  console.log(db);
   return (
     <div>
       <Helmet>
@@ -55,7 +52,9 @@ const Services = () => {
                         Highlight
                       </span>
                       <h2 className="mt-2 mb-2  font-bold">{item.title}</h2>
-                      <p className="text-sm">{item.description}...</p>
+                      <p className="text-sm">
+                        {item.description.slice(0, 50)}...
+                      </p>
                       <div className="mt-3 flex items-center">
                         <span className="text-sm font-semibold">$ </span>
                         <span className="font-bold text-xl">{item.price}</span>

@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import styles from "../../styles";
 const AddServices = () => {
   const [service, setService] = useState({});
-  const [review, setReview] = useState([]);
+  // const [review, setReview] = useState([]);
   const addUser = (e) => {
     // post data
 
@@ -25,7 +25,6 @@ const AddServices = () => {
           e.target.reset();
         }
       });
-    console.log(review);
   };
 
   const handleInput = (e) => {

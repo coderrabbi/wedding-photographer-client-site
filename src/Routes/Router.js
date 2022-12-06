@@ -12,6 +12,7 @@ import ServiceItems from "../pages/Services/ServiceItems";
 import Allservices from "../pages/Services/Allservices";
 
 import PrivetRouter from "./privetRouter/PrivetRouter";
+import EditReview from "../pages/EditReview/EditReview";
 
 export const routes = createBrowserRouter([
   {
@@ -44,7 +45,14 @@ export const routes = createBrowserRouter([
         element: <ServiceItems />,
       },
       { path: "/blog", element: <Blog /> },
-      { path: "/addservices", element: <AddServices /> },
+      {
+        path: "/addservices",
+        element: (
+          <PrivetRouter>
+            <AddServices />{" "}
+          </PrivetRouter>
+        ),
+      },
       { path: "/about", element: <About /> },
       { path: "/login", element: <Login /> },
       {
@@ -55,6 +63,17 @@ export const routes = createBrowserRouter([
           </PrivetRouter>
         ),
       },
+      {
+        path: "/reviews/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/review/${params.id}`),
+        element: (
+          <PrivetRouter>
+            <EditReview />
+          </PrivetRouter>
+        ),
+      },
+
       { path: "/register", element: <Register /> },
     ],
   },

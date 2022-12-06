@@ -6,7 +6,7 @@ import { AuthContext } from "../../../context/AuthProvider";
 import { Helmet } from "react-helmet";
 
 const Register = () => {
-  const { createUser, loading } = useContext(AuthContext);
+  const { createUser, setLoading } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,6 +17,7 @@ const Register = () => {
       .then((result) => {
         const user = result.user;
         if (user) {
+          setLoading(false);
           alert("successfully account created");
           navigate("/");
         }
