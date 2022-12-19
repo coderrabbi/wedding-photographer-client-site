@@ -16,9 +16,7 @@ const About = () => {
             alt=""
           />
         </div>
-        {/* <div className="absolute z-[0] w-[40%] h-[35%] top-[800px]  left-0 pink__gradient" />
-        <div className="absolute z-[1] w-[80%] h-[80%] rounded-full white__gradient bottom-40" />
-        <div className="absolute z-[0] w-[50%] h-[50%] left-20 top-[700px] blue__gradient" /> */}
+
         <div className={`${layout.sectionInfo} gap-4`}>
           <div>
             <h2 className={styles.heading2}>

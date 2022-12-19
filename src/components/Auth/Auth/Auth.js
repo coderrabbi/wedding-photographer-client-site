@@ -30,7 +30,7 @@ const Auth = () => {
 
         const currentUser = { email: user.email };
         if (user.uid) {
-          fetch("http://localhost:5000/jwt", {
+          fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/jwt`, {
             method: "POST",
             headers: {
               "content-type": "application/json",
@@ -39,19 +39,12 @@ const Auth = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log(data);
               localStorage.setItem("service-token", data.token);
             });
           navigate(from, { replace: true });
           setLoading(false);
           toast.success("login successful");
         }
-
-        // if (user.emailVerified) {
-        //   navigate(from, { replace: true });
-        //   loading = false;
-        //   toast.success("successfull");
-        // }
       })
       .catch((error) => {
         console.log(error);
@@ -63,7 +56,7 @@ const Auth = () => {
         const user = result.user;
         if (user.uid) {
           navigate(from, { replace: true });
-          loading = false;
+          setLoading = false;
         }
         setUser(user);
       })

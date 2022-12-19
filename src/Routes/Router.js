@@ -25,8 +25,7 @@ export const routes = createBrowserRouter([
     children: [
       {
         path: "/",
-        // loader: () =>
-        //   fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services`),
+
         element: <Home />,
       },
       {
@@ -66,7 +65,7 @@ export const routes = createBrowserRouter([
       {
         path: "/reviews/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/review/${params.id}`),
+          fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/review/${params.id}`),
         element: (
           <PrivetRouter>
             <EditReview />

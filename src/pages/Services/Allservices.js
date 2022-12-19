@@ -41,11 +41,10 @@ const Services = () => {
                       </PhotoView>
                     </div>
                     <div className="p-4">
-                      <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">
-                        Highlight
-                      </span>
                       <h2 className="mt-2 mb-2  font-bold">{item.title}</h2>
-                      <p className="text-sm">{item.description}...</p>
+                      <p className="text-sm">
+                        {item.description.slice(0, 120)}...
+                      </p>
                       <div className="mt-3 flex items-center">
                         <span className="text-sm font-semibold">$ </span>
                         <span className="font-bold text-xl">{item.price}</span>

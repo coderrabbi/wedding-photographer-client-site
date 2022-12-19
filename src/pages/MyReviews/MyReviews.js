@@ -7,7 +7,7 @@ import { CiEdit, CiTrash } from "react-icons/ci";
 const MyReviews = () => {
   const { user, logOut } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-
+  console.log(myReviews);
   useEffect(() => {
     fetch(`http://localhost:5000/user-review?email=${user.email}`, {
       headers: {
@@ -65,7 +65,10 @@ const MyReviews = () => {
                     Review
                   </th>
                   <th scope="col" className="py-3 px-6">
-                    Action
+                    Edit
+                  </th>
+                  <th scope="col" className="py-3 px-6">
+                    Delete
                   </th>
                 </tr>
               </thead>
@@ -93,6 +96,11 @@ const MyReviews = () => {
                         >
                           <CiEdit className="text-3xl" />
                         </Link>
+                      </span>
+                    </td>
+
+                    <td className="py-4 px-6">
+                      <span className="flex justify-between items-center">
                         <CiTrash
                           onClick={() => handelDelete(review._id)}
                           className="text-3xl text-blue-500"

@@ -10,7 +10,7 @@ const AddReview = ({ item }) => {
   const handleReview = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:5000/services/${item._id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/services/${item._id}`, {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(reviews),

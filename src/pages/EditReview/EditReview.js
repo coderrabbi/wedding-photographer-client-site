@@ -1,16 +1,15 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useLoaderData } from "react-router-dom";
-import { AuthContext } from "../../context/AuthProvider";
+
 import styles from "../../styles";
 
 const EditReview = () => {
-  const { user } = useContext(AuthContext);
   const editableData = useLoaderData();
   const [editReview, setEditReview] = useState(editableData);
 
   const editUserReview = (event) => {
     event.preventDefault();
-    fetch(`http://localhost:5000/review/${editReview._id}`, {
+    fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/review/${editReview._id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
