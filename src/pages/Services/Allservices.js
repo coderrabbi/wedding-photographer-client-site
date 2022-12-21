@@ -4,8 +4,14 @@ import styles from "../../styles";
 import { Helmet } from "react-helmet";
 import "react-photo-view/dist/react-photo-view.css";
 import { PhotoProvider, PhotoView } from "react-photo-view";
+import Loader from "../../components/Loader/Loader";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 const Services = () => {
+  const { loading } = useContext(AuthContext);
+
   const db = useLoaderData();
+  if (loading) return <Loader />;
   return (
     <div>
       <Helmet>
@@ -19,7 +25,6 @@ const Services = () => {
           <span className="text-gradient"> Services </span>
         </h1>
       </div>
-
       <PhotoProvider>
         <div className="foo">
           <div
@@ -41,10 +46,11 @@ const Services = () => {
                       </PhotoView>
                     </div>
                     <div className="p-4">
+                      <span className="inline-block px-2 py-1 leading-none bg-orange-200 text-orange-800 rounded-full font-semibold uppercase tracking-wide text-xs">
+                        Highlight
+                      </span>
                       <h2 className="mt-2 mb-2  font-bold">{item.title}</h2>
-                      <p className="text-sm">
-                        {item.description.slice(0, 120)}...
-                      </p>
+                      <p className="text-sm">{item.description}...</p>
                       <div className="mt-3 flex items-center">
                         <span className="text-sm font-semibold">$ </span>
                         <span className="font-bold text-xl">{item.price}</span>

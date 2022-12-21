@@ -5,29 +5,28 @@ import { Link } from "react-router-dom";
 import { CiEdit, CiTrash } from "react-icons/ci";
 
 const MyReviews = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [myReviews, setMyReviews] = useState([]);
-  console.log(myReviews);
+
   useEffect(() => {
-    fetch(`http://localhost:5000/user-review?email=${user.email}`, {
-      headers: {
-        authorization: `Bearer ${localStorage.getItem("service_token")}`,
-      },
-    })
-      .then((res) => {
-        if (res.status === 401 || res.status === 403) {
-          logOut();
-        }
-        return res.json();
-      })
+    fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/user-review?email=${user.email}`,
+      {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("service_token")}`,
+        },
+      }
+    )
+      .then((res) => res.json())
       .then((data) => {
         setMyReviews(data);
-      });
-  }, [user?.email, logOut]);
+      })
+      .catch((err) => console.log(err));
+  }, [user?.email]);
   const handelDelete = (id) => {
     const confirm = window.confirm("Are you sure you want to delete");
     if (confirm) {
-      fetch(`http://localhost:5000/user-review/${id}`, {
+      fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/user-review/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -47,7 +46,7 @@ const MyReviews = () => {
       </Helmet>
       <div className="py-6">
         <h4>my review</h4>
-        {myReviews.length === 0 ? (
+        {myReviews?.length === 0 ? (
           <div>
             <h1 className="text-white text-[70px] text-center text-bold">
               NO REVIEW FOUND
@@ -98,12 +97,11 @@ const MyReviews = () => {
                         </Link>
                       </span>
                     </td>
-
                     <td className="py-4 px-6">
                       <span className="flex justify-between items-center">
                         <CiTrash
                           onClick={() => handelDelete(review._id)}
-                          className="text-3xl text-blue-500"
+                          className="text-3xl text-blue-500 cursor-pointer"
                         />
                       </span>
                     </td>

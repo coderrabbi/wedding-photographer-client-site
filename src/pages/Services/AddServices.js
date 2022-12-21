@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 
 import { Helmet } from "react-helmet";
+import { useNavigate } from "react-router-dom";
 
 import Swal from "sweetalert2";
 import styles from "../../styles";
 const AddServices = () => {
   const [service, setService] = useState({});
+  const navigate = useNavigate();
   // const [review, setReview] = useState([]);
   const addUser = (e) => {
     // post data
@@ -23,6 +25,7 @@ const AddServices = () => {
         if (data.acknowledged) {
           Swal.fire("Good job!", "You added a service", "success");
           e.target.reset();
+          navigate("/services");
         }
       });
   };

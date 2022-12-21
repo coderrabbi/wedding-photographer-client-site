@@ -9,7 +9,9 @@ const Services = () => {
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(3);
   useEffect(() => {
-    fetch(`http://localhost:5000/services?page=${page}&size=${size}`)
+    fetch(
+      `${process.env.REACT_APP_SERVER_BASE_URL}/services?page=${page}&size=${size}`
+    )
       .then((res) => res.json())
       .then((data) => setDb(data));
   }, [page, size]);

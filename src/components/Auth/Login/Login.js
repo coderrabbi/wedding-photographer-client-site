@@ -17,6 +17,7 @@ const Login = () => {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
+
     signIn(email, password)
       .then((result) => {
         const user = result.user;
@@ -31,21 +32,19 @@ const Login = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              localStorage.setItem("service_toke", data.token);
+              localStorage.setItem("service_token", data.token);
+              navigate(from, { replace: true });
+              setLoading(false);
+              toast.success("login successful");
             });
-          navigate(from, { replace: true });
-          setLoading(false);
-          toast.success("login successful");
         }
       })
       .catch((error) => {
         const errorMessage = error.message;
         toast.error(errorMessage);
         setLoading(false);
-      })
-      .finally(() => {
-        setLoading(false);
       });
+    if (loading) return <Loader />;
   };
 
   return (
@@ -53,7 +52,7 @@ const Login = () => {
       <Helmet>
         <title>Login-wedding-photographer</title>
       </Helmet>
-      {loading && <Loader />}
+
       <div className="bg-primary min-h-screen flex flex-col items-center justify-center ">
         <div
           className="flex flex-col bg-white shadow-md px-4 sm:px-6 md:px-8lg:px-10
@@ -166,7 +165,7 @@ const Login = () => {
       ease-in
     "
                 >
-                  <span className="mr-2 uppercase">Sign Up</span>
+                  <span className="mr-2 uppercase">Sign In</span>
                   <span>
                     <svg
                       className="h-6 w-6"

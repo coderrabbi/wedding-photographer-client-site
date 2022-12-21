@@ -1,12 +1,15 @@
 import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdPersonPin, MdAlternateEmail, MdOutlineLock } from "react-icons/md";
 import Auth from "../Auth/Auth";
 import { AuthContext } from "../../../context/AuthProvider";
 import { Helmet } from "react-helmet";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const { createUser, setLoading } = useContext(AuthContext);
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -18,14 +21,14 @@ const Register = () => {
         const user = result.user;
         if (user) {
           setLoading(false);
-          alert("successfully account created");
-          navigate("/");
+          toast.success("user created successfully");
+          navigate(from, { replace: true });
         }
         form.reset();
       })
       .catch((error) => {
         console.log(error);
-        alert("email already in use");
+        toast.warning(error.message);
         form.reset();
       });
   };
@@ -79,6 +82,7 @@ const Register = () => {
                   <input
                     type="text"
                     name="name"
+                    required
                     className="
             text-sm
             placeholder-gray-500
@@ -118,6 +122,7 @@ const Register = () => {
                   <input
                     type="email"
                     name="email"
+                    required
                     className="
             text-sm
             placeholder-gray-500
@@ -159,6 +164,7 @@ const Register = () => {
                   <input
                     type="password"
                     name="password"
+                    required
                     className="
             text-sm
             placeholder-gray-500

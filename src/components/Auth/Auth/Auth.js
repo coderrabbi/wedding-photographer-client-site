@@ -40,10 +40,10 @@ const Auth = () => {
             .then((res) => res.json())
             .then((data) => {
               localStorage.setItem("service-token", data.token);
+              toast.success("login successful");
+              setLoading(false);
+              navigate(from, { replace: true });
             });
-          navigate(from, { replace: true });
-          setLoading(false);
-          toast.success("login successful");
         }
       })
       .catch((error) => {
@@ -56,7 +56,7 @@ const Auth = () => {
         const user = result.user;
         if (user.uid) {
           navigate(from, { replace: true });
-          setLoading = false;
+          loading = false;
         }
         setUser(user);
       })

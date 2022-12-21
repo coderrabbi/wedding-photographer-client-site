@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 const ServiceReview = ({ item }) => {
   const [review, setReview] = useState([]);
   useEffect(() => {
-    fetch(`http://localhost:5000/review`)
+    fetch(`${process.env.REACT_APP_SERVER_BASE_URL}/review`)
       .then((res) => res.json())
       .then((data) => {
         setReview(data);
